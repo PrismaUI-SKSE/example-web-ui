@@ -49,7 +49,7 @@ export const SKSE_API = {
 
     listeners.push({ eventName, callback });
   },
-  unsubscribe: (eventName: string, callback: (...args: any[]) => any) => {
+  unsubscribe: (eventName: string) => {
     if (!window.SKSE_API) {
       throw new Error("Global SKSE_API doesn't exist!");
     }
