@@ -43,6 +43,10 @@ export const SKSE_API = {
       throw new Error("Global SKSE_API doesn't exist!");
     }
 
+    if (listeners.find(l => l.eventName === eventName)) {
+      throw new Error("The subscriber already exists!");
+    }
+
     listeners.push({ eventName, callback });
   },
   unsubscribe: (eventName: string, callback: (...args: any[]) => any) => {
@@ -50,9 +54,9 @@ export const SKSE_API = {
       throw new Error("Global SKSE_API doesn't exist!");
     }
 
-    const index = listeners.indexOf({ eventName, callback });
+    const index = listeners.findIndex(l => l.eventName === eventName);
 
-    listeners.splice(index, 1);
+    if (index !== -1) listeners.splice(index, 1);
   },
   sendToSKSE: (fnName: string, data?: string) => {
     try {
