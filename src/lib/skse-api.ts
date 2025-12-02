@@ -43,7 +43,7 @@ export const SKSE_API = {
       throw new Error("Global SKSE_API doesn't exist!");
     }
 
-    if (listeners.find(l => l.eventName === eventName)) {
+    if (listeners.some((l) => l.eventName === eventName)) {
       throw new Error("The subscriber already exists!");
     }
 
@@ -54,7 +54,7 @@ export const SKSE_API = {
       throw new Error("Global SKSE_API doesn't exist!");
     }
 
-    const index = listeners.findIndex(l => l.eventName === eventName);
+    const index = listeners.findIndex((l) => l.eventName === eventName);
 
     if (index !== -1) listeners.splice(index, 1);
   },
